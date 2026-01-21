@@ -1,0 +1,395 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#dc2626">
+    <title>Husky Ambassador Tour Guide</title>
+    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiSHVza3kgQW1iYXNzYWRvciBUb3VyIEd1aWRlIiwic2hvcnRfbmFtZSI6IlRvdXIgR3VpZGUiLCJkZXNjcmlwdGlvbiI6Ik5vcnRoZWFzdGVybiBVbml2ZXJzaXR5IExvbmRvbiBDYW1wdXMgVG91ciBHdWlkZSIsInN0YXJ0X3VybCI6Ii4vIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiI2ZmZmZmZiIsInRoZW1lX2NvbG9yIjoiI2RjMjYyNiIsIm9yaWVudGF0aW9uIjoicG9ydHJhaXQiLCJpY29ucyI6W3sic3JjIjoiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCNGJXeHVjejBpYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01DOXpkbWNpSUhkcFpIUm9QU0l4T1RJaUlHaGxhV2RvZEQwaU1Ua3lJajQ4Y21WamRDQjNhV1IwYUQwaU1Ua3lJaUJvWldsbmFIUTlJakU1TWlJZ1ptbHNiRDBpSTJSak1qWXlOaUl2UGp4MGFISmxaU0J6ZEhsc1pUMGlabWxzYkRwM2FHbDBaVHRtYjI1MExYTnBlbVU2TkRWd2VEc3hkbUZzYVdkdU9tSmhjMlZzYVc1bE8zUmxlSFF0WVc1amFHOXlPbTFwWkdSc1pTSStVRHd2ZEdoelpUNDhMM04yWno0PSIsInNpemVzIjoiMTkyeDE5MiIsInR5cGUiOiJpbWFnZS9zdmcreG1sIn0seyJzcmMiOiJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lJSGRwWkhSb1BTSTFNVElpSUdobGFXZG9kRDBpTlRFeUlqNDhjbVZqZENCM2FXUjBhRDBpTlRFeUlpQm9aV2xuYUhROUlqVXhNaUlnWm1sc2JEMGlJMlJqTWpZeU5pSXZQanh6ZEhsc1pUNHVjM1I2ZTJacGJHdzZkMmhwZEdVN1ptOXVkQzF6YVhwbE9qUTFjSGc3TlhaaGJHbG5ianBpWVhObGJHbHVaVHQwWlhoMExXRnVZMmh2Y2pwdGFXUmtiR1Y5UEM5emRIbHNaVDQ4ZEdWNGRDQmpiR0Z6Y3owaWMzUjZJaUI0UFNJeU5UWWlJSGs5SWpJMU5pSStVRHd2ZEdWNGRENDhMM04yWno0PSIsInNpemVzIjoiNTEyeDUxMiIsInR5cGUiOiJpbWFnZS9zdmcreG1sIn1dfQ==">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; background: linear-gradient(to bottom right, #f9fafb, #f3f4f6); min-height: 100vh; overflow-x: hidden; }
+        .install-banner { position: fixed; bottom: 0; left: 0; right: 0; background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); color: white; padding: 1rem; z-index: 1000; box-shadow: 0 -4px 20px rgba(0,0,0,0.3); display: none; animation: slideUp 0.3s ease-out; }
+        .install-banner.show { display: block; }
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        .install-content { max-width: 56rem; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+        .install-text h3 { font-size: 1rem; margin-bottom: 0.25rem; }
+        .install-text p { font-size: 0.75rem; opacity: 0.9; }
+        .install-buttons { display: flex; gap: 0.5rem; }
+        .install-btn { padding: 0.5rem 1rem; border: none; border-radius: 0.5rem; font-weight: 600; cursor: pointer; font-size: 0.875rem; transition: all 0.2s; }
+        .install-btn-primary { background: white; color: #dc2626; }
+        .install-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(255,255,255,0.3); }
+        .install-btn-secondary { background: transparent; color: white; border: 1px solid white; }
+        .install-btn-secondary:hover { background: rgba(255,255,255,0.1); }
+        .header { background: #dc2626; color: white; padding: 1rem; text-align: center; position: sticky; top: 0; z-index: 50; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .header h1 { font-size: 1.25rem; font-weight: bold; }
+        .header p { font-size: 0.875rem; color: #fecaca; margin-top: 0.25rem; }
+        .offline-badge { display: none; position: fixed; bottom: 1rem; left: 1rem; background: #16a34a; color: white; padding: 0.5rem 1rem; border-radius: 2rem; font-size: 0.75rem; font-weight: 600; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; }
+        .offline-badge.show { display: block; }
+        .nav-tabs { background: white; border-bottom: 1px solid #e5e7eb; position: sticky; top: 88px; z-index: 30; overflow-x: auto; white-space: nowrap; }
+        .nav-tabs-wrapper { max-width: 56rem; margin: 0 auto; display: flex; }
+        .nav-tab { padding: 0.75rem 1rem; border: none; background: none; border-bottom: 2px solid transparent; cursor: pointer; color: #6b7280; font-size: 0.875rem; display: flex; align-items: center; gap: 0.5rem; transition: all 0.2s; }
+        .nav-tab:hover { color: #dc2626; }
+        .nav-tab.active { color: #dc2626; border-bottom-color: #dc2626; font-weight: 600; }
+        .nav-tab svg { width: 1rem; height: 1rem; }
+        .content { max-width: 56rem; margin: 0 auto; padding: 1rem; padding-bottom: 6rem; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .card { background: white; border-radius: 0.5rem; padding: 1.5rem; margin-bottom: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .card-header { background: linear-gradient(to right, #dc2626, #b91c1c); color: white; padding: 1.5rem; border-radius: 0.5rem; text-align: center; margin-bottom: 1rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .card-header svg { width: 3rem; height: 3rem; margin: 0 auto 0.75rem; display: block; }
+        .card-header h2 { font-size: 1.5rem; font-weight: bold; margin-bottom: 0.5rem; }
+        .card-header p { color: #fecaca; }
+        .grid { display: grid; gap: 1rem; }
+        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+        .grid-3 { grid-template-columns: repeat(3, 1fr); }
+        .info-box { padding: 1rem; border-radius: 0.5rem; border-left: 4px solid; }
+        .info-box.blue { background: #eff6ff; border-color: #2563eb; }
+        .info-box.green { background: #f0fdf4; border-color: #16a34a; }
+        .info-box.yellow { background: #fefce8; border-color: #ca8a04; }
+        .info-box.red { background: #fef2f2; border-color: #dc2626; }
+        .info-box.purple { background: #faf5ff; border-color: #9333ea; }
+        .info-box.orange { background: #fff7ed; border-color: #ea580c; }
+        .info-box h3 { font-weight: bold; margin-bottom: 0.5rem; }
+        .info-box ul { list-style: none; padding-left: 0; }
+        .info-box ul li { font-size: 0.875rem; margin: 0.25rem 0; }
+        .action-buttons { background: white; border-radius: 0.5rem; padding: 1.5rem; margin-bottom: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border: 2px solid #dc2626; }
+        .action-buttons h3 { font-size: 1.125rem; font-weight: bold; color: #dc2626; margin-bottom: 1rem; text-align: center; }
+        .action-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; }
+        .action-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1.25rem; border-radius: 0.5rem; border: none; cursor: pointer; text-decoration: none; color: white; font-weight: 600; font-size: 0.875rem; text-align: center; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .action-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+        .action-btn svg { width: 2rem; height: 2rem; margin-bottom: 0.5rem; }
+        .action-btn.checkout { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
+        .action-btn.return { background: linear-gradient(135deg, #16a34a, #15803d); }
+        .action-btn.feedback { background: linear-gradient(135deg, #9333ea, #7e22ce); }
+        .action-btn-label { font-size: 0.75rem; opacity: 0.9; margin-top: 0.25rem; }
+        .tour-stop { background: white; border: 2px solid #e5e7eb; border-radius: 0.5rem; margin-bottom: 0.75rem; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .tour-stop-header { padding: 1rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: white; }
+        .tour-stop-header:hover { background: #f9fafb; }
+        .tour-stop-title { display: flex; align-items: center; gap: 0.75rem; }
+        .tour-stop-number { width: 2rem; height: 2rem; background: #dc2626; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.875rem; flex-shrink: 0; }
+        .tour-stop-name { font-weight: bold; color: #1f2937; }
+        .tour-stop-meta { font-size: 0.75rem; color: #6b7280; margin-top: 0.125rem; }
+        .tour-stop-content { display: none; padding: 0 1rem 1rem; }
+        .tour-stop-content.expanded { display: block; }
+        .tour-stop-section { padding: 0.75rem; border-radius: 0.5rem; margin-bottom: 0.75rem; }
+        .tour-stop-section h4 { font-weight: 600; font-size: 0.875rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+        .tour-stop-section ul { list-style: none; padding: 0; }
+        .tour-stop-section ul li { font-size: 0.875rem; color: #374151; margin: 0.25rem 0; }
+        .tour-stop-script { font-size: 0.75rem; color: #6b7280; font-style: italic; line-height: 1.5; }
+        .expandable-section { background: white; border: 2px solid #e5e7eb; border-radius: 0.5rem; margin-bottom: 0.75rem; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .expandable-header { padding: 1rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: white; }
+        .expandable-header:hover { background: #f9fafb; }
+        .expandable-header h3 { font-weight: bold; font-size: 1.125rem; }
+        .expandable-content { display: none; padding: 0 1rem 1rem; }
+        .expandable-content.expanded { display: block; }
+        .contact-item { background: #f9fafb; padding: 0.5rem; border-radius: 0.25rem; display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+        .contact-name { font-weight: 600; font-size: 0.875rem; }
+        .contact-email { font-size: 0.75rem; color: #2563eb; text-decoration: none; }
+        .contact-email:hover { text-decoration: underline; }
+        .btn { width: 100%; padding: 0.75rem; border: none; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .btn-secondary { background: #e5e7eb; color: #374151; }
+        .btn-secondary:hover { background: #d1d5db; }
+        .quick-nav { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+        .quick-nav-btn { padding: 0.75rem; border-radius: 0.5rem; border: none; cursor: pointer; text-align: left; transition: all 0.2s; }
+        .quick-nav-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .quick-nav-btn svg { width: 1.25rem; height: 1.25rem; margin-bottom: 0.25rem; }
+        .quick-nav-btn p { font-weight: 600; font-size: 0.875rem; margin-bottom: 0.125rem; }
+        .quick-nav-btn small { font-size: 0.75rem; color: #6b7280; }
+        @media (max-width: 640px) { .grid-2 { grid-template-columns: 1fr; } .grid-3 { grid-template-columns: 1fr; } .quick-nav { grid-template-columns: 1fr; } .install-content { flex-direction: column; text-align: center; } .action-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div id="installBanner" class="install-banner">
+        <div class="install-content">
+            <div class="install-text">
+                <h3>📱 Install Tour Guide App</h3>
+                <p>Add to your home screen for quick access and offline use</p>
+            </div>
+            <div class="install-buttons">
+                <button class="install-btn install-btn-primary" onclick="installApp()">Install</button>
+                <button class="install-btn install-btn-secondary" onclick="dismissInstall()">Later</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="offlineBadge" class="offline-badge">✓ Working Offline</div>
+
+    <div class="header">
+        <h1>Husky Ambassador Tour Guide</h1>
+        <p>Interactive Learning & Quick Reference</p>
+    </div>
+
+    <div class="nav-tabs">
+        <div class="nav-tabs-wrapper">
+            <button class="nav-tab active" data-tab="home">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                Home
+            </button>
+            <button class="nav-tab" data-tab="tour-management">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                Tour Management
+            </button>
+            <button class="nav-tab" data-tab="tour-stops">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                Tour Stops
+            </button>
+            <button class="nav-tab" data-tab="handbook">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                Handbook
+            </button>
+            <button class="nav-tab" data-tab="quick-ref">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                Quick Ref
+            </button>
+            <button class="nav-tab" data-tab="safety">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                Safety
+            </button>
+            <button class="nav-tab" data-tab="resources">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                Resources
+            </button>
+        </div>
+    </div>
+
+    <div class="content">
+        <div id="home" class="tab-content active">
+            <div class="card-header">
+                <h2>Your Story. Their Future.</h2>
+                <p>This guide helps you learn the tour and serves as your quick reference during actual tours.</p>
+            </div>
+            
+            <div class="action-buttons">
+                <h3>📋 Tour Management</h3>
+                <div class="action-grid">
+                    <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=gcLuqKOqrk2sm5o5i5IV5xnsaKR8NoVCtfyS27AI-HlURFdGNVFTUDgwNTJSQVRNRUc3OUxJWVJQOS4u" target="_blank" class="action-btn checkout">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                        Check Out iPad
+                        <span class="action-btn-label">Before tour starts</span>
+                    </a>
+                    <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=gcLuqKOqrk2sm5o5i5IV5xnsaKR8NoVCtfyS27AI-HlUNTNNT09TTllBWTBGVTUzVjZJNlVFUzNSMC4u" target="_blank" class="action-btn return">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Return iPad
+                        <span class="action-btn-label">After tour ends</span>
+                    </a>
+                    <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=gcLuqKOqrk2sm5o5i5IV5xnsaKR8NoVCtfyS27AI-HlURVZNV1NXVFA2N0lISUkyVElSMllBWU00Ny4u" target="_blank" class="action-btn feedback">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                        Submit Feedback
+                        <span class="action-btn-label">Share your experience</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="grid grid-2">
+                <div class="info-box blue">
+                    <h3>Study Mode</h3>
+                    <p style="font-size: 0.875rem; margin-bottom: 0.75rem;">Learning the tour? Use this guide to:</p>
+                    <ul><li>• Review all 11 tour stops in detail</li><li>• See key points & personal prompts</li><li>• Practice with example scripts</li><li>• Understand protocols & safety</li></ul>
+                </div>
+                <div class="info-box green">
+                    <h3>Tour Mode</h3>
+                    <p style="font-size: 0.875rem; margin-bottom: 0.75rem;">On an actual tour? Use this for:</p>
+                    <ul><li>• Quick stop-by-stop reference</li><li>• Access contact info & safety tips</li><li>• Review audience types</li></ul>
+                </div>
+            </div>
+            <div class="info-box yellow" style="border: 2px solid #ca8a04;">
+                <h3 style="display: flex; align-items: center; gap: 0.5rem;"><svg style="width: 1.5rem; height: 1.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>Remember: Make It Personal</h3>
+                <p style="font-size: 0.875rem; margin-bottom: 0.5rem;">Every tour stop includes a "Personal Prompt" to help you share YOUR authentic Northeastern experience. Your stories are what make the difference!</p>
+                <p style="font-size: 0.75rem; font-style: italic; color: #854d0e;">Prospective students can read facts online—but they can't experience YOUR journey anywhere else.</p>
+            </div>
+            
+            <div class="info-box purple" style="border: 2px solid #9333ea;">
+                <h3>📱 Teams Communication - REQUIRED</h3>
+                <ul style="margin-top: 0.5rem; font-size: 0.875rem;">
+                    <li>• <strong>Download Microsoft Teams</strong> on your phone before your first shift</li>
+                    <li>• <strong>When on shift:</strong> Respond to Teams messages within 5 minutes</li>
+                    <li>• <strong>Cannot respond?</strong> Provide a valid reason as soon as possible</li>
+                </ul>
+                <p style="font-size: 0.75rem; margin-top: 0.75rem; font-style: italic; color: #6b21a8;">Security and recruitment staff will message you via Teams. Quick responses ensure smooth tour coordination.</p>
+            </div>
+            
+            <div class="card"><h3 style="font-weight: bold; margin-bottom: 0.75rem;">Quick Navigation</h3><div class="quick-nav"><button class="quick-nav-btn" style="background: #fef2f2;" onclick="switchTab('tour-management')"><svg fill="none" stroke="#dc2626" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg><p>Tour Management</p><small>Check-out & feedback</small></button><button class="quick-nav-btn" style="background: #eff6ff;" onclick="switchTab('tour-stops')"><svg fill="none" stroke="#2563eb" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg><p>Tour Stops</p><small>11 detailed stops</small></button><button class="quick-nav-btn" style="background: #fef3c7;" onclick="switchTab('handbook')"><svg fill="none" stroke="#ca8a04" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg><p>Handbook</p><small>Full reference</small></button><button class="quick-nav-btn" style="background: #f0fdf4;" onclick="switchTab('quick-ref')"><svg fill="none" stroke="#16a34a" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg><p>Quick Ref</p><small>Audiences & contacts</small></button></div></div>
+        </div>
+        
+        <div id="tour-management" class="tab-content">
+            <h2 style="font-size: 1.5rem; font-weight: bold; color: #1f2937; margin-bottom: 1rem;">📋 Tour Management</h2>
+
+            <div class="info-box red" style="border: 2px solid #dc2626; margin-bottom: 1rem;">
+                <h3>⚠️ Guest Check-In & Lanyard Responsibilities</h3>
+                <p style="font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem;">You are responsible for checking in ALL guests and providing lanyards:</p>
+                
+                <div style="margin-top: 0.75rem;">
+                    <p style="font-weight: 600; font-size: 0.875rem; margin-bottom: 0.5rem;">Check-In Process:</p>
+                    <ul style="margin-bottom: 0.75rem;">
+                        <li>• <strong>Pre-booked guests:</strong> Find their name in Slate on the iPad and check them in</li>
+                        <li>• <strong>Walk-in guests:</strong> Have them scan the QR code to register for the ad-hoc tour event, then check them in via Slate</li>
+                    </ul>
+                    
+                    <p style="font-weight: 600; font-size: 0.875rem; margin-bottom: 0.5rem;">Lanyard Management:</p>
+                    <ul>
+                        <li>• Collect lanyards from the box by security</li>
+                        <li>• Give a lanyard to EVERY guest attending the campus tour</li>
+                        <li>• At the end of tour: Collect all lanyards from guests</li>
+                        <li>• Return all lanyards to the box by security in Devon House</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info-box blue">
+                <h3>📝 Complete Tour Workflow</h3>
+                <div style="font-size: 0.875rem; margin-top: 0.75rem;">
+                    <p style="margin-bottom: 0.75rem;"><strong>Before Your Shift:</strong></p>
+                    <ul style="margin-bottom: 1rem;">
+                        <li>• Ensure Microsoft Teams is downloaded and notifications are ON</li>
+                        <li>• Check for any shift briefings or updates in Teams</li>
+                    </ul>
+                    
+                    <p style="margin-bottom: 0.75rem;"><strong>Before Tour:</strong></p>
+                    <ul style="margin-bottom: 1rem;">
+                        <li>1. Complete digital check-out form (Home tab)</li>
+                        <li>2. Notify Devon House Security (Mon/Fri) or meet recruitment staff (Wed)</li>
+                        <li>3. Collect iPad from Locker 105</li>
+                        <li>4. Collect jacket/umbrella if needed from Locker 105</li>
+                        <li>5. <strong>Keep Teams notifications active</strong> - respond within 5 minutes if contacted</li>
+                    </ul>
+                    
+                    <p style="margin-bottom: 0.75rem;"><strong>When Guests Arrive:</strong></p>
+                    <ul style="margin-bottom: 1rem;">
+                        <li>1. Welcome guests warmly</li>
+                        <li>2. Check in ALL guests using iPad via Slate:</li>
+                        <li style="padding-left: 1rem;">→ Pre-booked: Find their name in Slate and check in</li>
+                        <li style="padding-left: 1rem;">→ Walk-ins: Have them scan QR code first, then check in via Slate</li>
+                        <li>3. Collect lanyards from box by security</li>
+                        <li>4. Give each guest a lanyard</li>
+                        <li>5. Begin tour</li>
+                    </ul>
+                    
+                    <p style="margin-bottom: 0.75rem;"><strong>During Tour:</strong></p>
+                    <ul style="margin-bottom: 1rem;">
+                        <li>• Use "Tour Stops" tab for quick reference</li>
+                        <li>• Share your personal experiences at each stop</li>
+                        <li>• Engage with all guests, answer questions</li>
+                        <li>• Follow safety protocols (green lights only!)</li>
+                        <li>• <strong>Remain responsive on Teams</strong> during your shift</li>
+                    </ul>
+                    
+                    <p style="margin-bottom: 0.75rem;"><strong>After Tour (at Portsoken):</strong></p>
+                    <ul>
+                        <li>1. Offer to answer final questions</li>
+                        <li>2. Walk interested guests to Chapter Aldgate for accommodation tour</li>
+                        <li>3. Ask all guests to complete feedback survey (QR on iPad)</li>
+                        <li>4. <strong>COLLECT ALL LANYARDS from guests</strong></li>
+                        <li>5. Return to Devon House with lanyards and iPad</li>
+                        <li>6. <strong>Return all lanyards to box by security in Devon House</strong></li>
+                        <li>7. Return iPad to Locker 105</li>
+                        <li>8. Complete digital return form (Home tab)</li>
+                        <li>9. Complete digital feedback form (Home tab)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info-box green">
+                <h3>✅ Why This Matters</h3>
+                <ul style="margin-top: 0.5rem;">
+                    <li>• <strong>Guest tracking:</strong> Checking in via Slate helps us follow up with prospective students</li>
+                    <li>• <strong>Security:</strong> Lanyards identify authorized campus visitors</li>
+                    <li>• <strong>Teams responsiveness:</strong> Quick replies ensure smooth coordination when guests arrive</li>
+                    <li>• <strong>Your feedback:</strong> Helps improve tours for everyone</li>
+                </ul>
+            </div>
+
+            <div class="info-box yellow">
+                <h3>⏱️ Quick & Easy</h3>
+                <p style="font-size: 0.875rem; margin-top: 0.5rem;">Guest check-in takes about 30 seconds per person. Digital forms take less than 2 minutes total. Your participation helps us run smooth, professional tours!</p>
+            </div>
+            
+            <div class="info-box purple" style="border: 2px solid #9333ea;">
+                <h3>📱 Teams Communication - REQUIRED</h3>
+                <p style="font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem;">All Husky Ambassadors Must:</p>
+                <ul style="margin-top: 0.5rem;">
+                    <li>• <strong>Download Microsoft Teams</strong> on your phone before your first shift</li>
+                    <li>• <strong>Join the Husky Ambassador channel</strong> when added</li>
+                    <li>• <strong>Enable notifications</strong> to receive messages from security and recruitment staff</li>
+                    <li>• <strong>When working on a shift:</strong> Respond to Teams messages within 5 minutes</li>
+                    <li>• <strong>If you cannot respond within 5 minutes:</strong> Provide a valid reason as soon as possible</li>
+                </ul>
+                <p style="font-size: 0.75rem; margin-top: 0.75rem; font-style: italic; color: #6b21a8;">This ensures smooth coordination during tours and allows security/recruitment to reach you quickly when guests arrive or if issues arise.</p>
+            </div>
+        </div>
+        
+        <div id="handbook" class="tab-content">
+            <h2 style="font-size: 1.5rem; font-weight: bold; color: #1f2937; margin-bottom: 1rem;">📖 Ambassador Handbook</h2>
+            
+            <div class="info-box blue" style="margin-bottom: 1rem;">
+                <h3>Full Handbook Reference</h3>
+                <p style="font-size: 0.875rem;">Access the complete Ambassador Handbook below. Use this for detailed protocols, procedures, and comprehensive tour information.</p>
+            </div>
+            
+            <div style="background: white; border-radius: 0.5rem; padding: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <iframe 
+                    src="https://northeastern.sharepoint.com/sites/NULondonEM/_layouts/15/Doc.aspx?sourcedoc=%7B4A315AD6-A0AD-4F74-86CB-267986CFB877%7D&action=embedview" 
+                    width="100%" 
+                    height="800px" 
+                    frameborder="0"
+                    style="border: 1px solid #e5e7eb; border-radius: 0.5rem;">
+                    <p>Your browser does not support iframes. <a href="https://northeastern.sharepoint.com/:w:/r/sites/NULondonEM/_layouts/15/Doc.aspx?sourcedoc=%7B4A315AD6-A0AD-4F74-86CB-267986CFB877%7D&file=Husky%20Ambassador%20Handbook%2025%2026.docx" target="_blank">Click here to view the handbook</a></p>
+                </iframe>
+            </div>
+            
+            <div class="info-box yellow" style="margin-top: 1rem;">
+                <h3>📥 Can't see the handbook?</h3>
+                <p style="font-size: 0.875rem; margin-bottom: 0.5rem;">If the embedded viewer doesn't load, you may need to sign in to your Northeastern account first.</p>
+                <a href="https://northeastern.sharepoint.com/:w:/r/sites/NULondonEM/_layouts/15/Doc.aspx?sourcedoc=%7B4A315AD6-A0AD-4F74-86CB-267986CFB877%7D&file=Husky%20Ambassador%20Handbook%2025%2026.docx" 
+                   target="_blank" 
+                   style="display: inline-block; margin-top: 0.5rem; padding: 0.5rem 1rem; background: #dc2626; color: white; text-decoration: none; border-radius: 0.5rem; font-weight: 600; font-size: 0.875rem;">
+                    Open Handbook in New Tab
+                </a>
+            </div>
+        </div>
+        
+        <div id="tour-stops" class="tab-content"><h2 style="font-size: 1.5rem; font-weight: bold; color: #1f2937; margin-bottom: 0.5rem;">Tour Stops (60 minutes)</h2><p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem;">Expand any stop for full details, key points, and personal prompts</p><div id="tour-stops-container"></div><div class="info-box red" style="border: 2px solid #dc2626; margin-top: 1.5rem;"><p style="font-weight: bold; text-align: center; color: #991b1b; margin-bottom: 0.5rem;">🎯 Stop 10 (Portsoken 5th Floor) is THE most important</p><p style="font-size: 0.875rem; text-align: center; color: #374151;">This is where YOU sell Northeastern through your authentic story. Your decision, your realization, your impact.</p></div></div>
+        
+        <div id="quick-ref" class="tab-content"><h2 style="font-size: 1.5rem; font-weight: bold; color: #1f2937; margin-bottom: 1rem;">Quick Reference</h2><div class="expandable-section"><div class="expandable-header" onclick="toggleExpandable('audiences')"><h3>Know Your Audience</h3><svg style="width: 1.25rem; height: 1.25rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></div><div id="audiences-content" class="expandable-content"><div class="info-box blue" style="margin-bottom: 0.5rem;"><p style="font-weight: bold; font-size: 0.875rem; color: #1e40af; margin-bottom: 0.25rem;">London Scholars</p><p style="font-size: 0.75rem; color: #374151;">1 year in London + 3 years in US. Apply through Northeastern Boston (Common App/Coalition). Access to 300+ majors.</p></div><div class="info-box green" style="margin-bottom: 0.5rem;"><p style="font-weight: bold; font-size: 0.875rem; color: #166534; margin-bottom: 0.25rem;">NU London Undergraduates</p><p style="font-size: 0.75rem; color: #374151;">UK-based 3-year degree with US study options. Apply through NU London direct or UCAS. 13 programmes available.</p></div><div class="info-box purple" style="margin-bottom: 0.5rem;"><p style="font-weight: bold; font-size: 0.875rem; color: #6b21a8; margin-bottom: 0.25rem;">Parents</p><p style="font-size: 0.75rem; color: #374151;">Focus on support systems, safety, student wellbeing services, and how you've been supported.</p></div><div class="info-box yellow" style="margin-bottom: 0.5rem;"><p style="font-weight: bold; font-size: 0.875rem; color: #854d0e; margin-bottom: 0.25rem;">Counsellors/Agents</p><p style="font-size: 0.75rem; color: #374151;">Seeking entry requirements & programme details. If you don't know, provide UG email: undergraduate.study@nulondon.ac.uk</p></div><div class="info-box orange" style="margin-bottom: 0.5rem;"><p style="font-weight: bold; font-size: 0.875rem; color: #9a3412; margin-bottom: 0.25rem;">Home Students</p><p style="font-size: 0.75rem; color: #374151;">Bursary: £2,500-£5,000/year for households under £63,500 income. Doesn't need to be repaid.</p></div><div style="background: #fce7f3; padding: 0.75rem; border-radius: 0.5rem; border-left: 4px solid #db2777;"><p style="font-weight: bold; font-size: 0.875rem; color: #9f1239; margin-bottom: 0.25rem;">International Students</p><p style="font-size: 0.75rem; color: #374151;">Auto merit scholarship up to £3,000. Don't discuss visa—direct to UG inbox or visa team.</p></div></div></div><div class="expandable-section"><div class="expandable-header" onclick="toggleExpandable('contacts')"><h3>Important Contacts</h3><svg style="width: 1.25rem; height: 1.25rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></div><div id="contacts-content" class="expandable-content"><div class="contact-item"><span class="contact-name">Scott Loubser</span><a href="mailto:s.loubser@nulondon.ac.uk" class="contact-email">s.loubser@nulondon.ac.uk</a></div><div class="contact-item"><span class="contact-name">Gokce Dyson</span><a href="mailto:gokce.dyson@nulondon.ac.uk" class="contact-email">gokce.dyson@nulondon.ac.uk</a></div><div class="contact-item"><span class="contact-name">Hannah Ferrigno</span><a href="mailto:hannah.ferrigno@nulondon.ac.uk" class="contact-email">hannah.ferrigno@nulondon.ac.uk</a></div><div class="contact-item"><span class="contact-name">Devon House Security</span><a href="mailto:security.dh@nulondon.ac.uk" class="contact-email">security.dh@nulondon.ac.uk</a></div><div class="contact-item"><span class="contact-name">Portsoken Security</span><a href="mailto:security.ps@nulondon.ac.uk" class="contact-email">security.ps@nulondon.ac.uk</a></div><div class="contact-item"><span class="contact-name">UG Admissions</span><a href="mailto:undergraduate.study@nulondon.ac.uk" class="contact-email">undergraduate.study@nulondon.ac.uk</a></div></div></div><div class="expandable-section"><div class="expandable-header" onclick="toggleExpandable('crossing')"><h3>Minories/Portsoken Crossing</h3><svg style="width: 1.25rem; height: 1.25rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></div><div id="crossing-content" class="expandable-content"><div class="info-box red" style="border: 2px solid #dc2626; margin-bottom: 0.75rem;"><p style="font-weight: bold; text-align: center; color: #991b1b;">⚠️ ONLY CROSS WHEN WALK SIGN IS GREEN</p></div><ul style="list-style: none; padding: 0; margin-bottom: 0.75rem;"><li style="font-size: 0.875rem; margin: 0.5rem 0;">• Wait for walk signs at BOTH crossings</li><li style="font-size: 0.875rem; margin: 0.5rem 0;">• If group splits, wait on other side</li><li style="font-size: 0.875rem; margin: 0.5rem 0;">• Answer questions while waiting</li><li style="font-size: 0.875rem; margin: 0.5rem 0;">• Mention Start-Up Hub while walking</li></ul><div style="background: #f9fafb; padding: 0.75rem; border-radius: 0.5rem;"><p style="font-size: 0.75rem; font-style: italic; color: #6b7280;">"On our way to the next stop we'll cross a busy street, Minories, towards Portsoken. Please stay together. I'll wait for the walk signs at both crossings, and if we get split up, I'll wait on the other side."</p></div></div></div><div class="expandable-section"><div class="expandable-header" onclick="toggleExpandable('accessible')"><h3>Accessible Tours</h3><svg style="width: 1.25rem; height: 1.25rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></div><div id="accessible-content" class="expandable-content"><p style="font-size: 0.875rem; margin-bottom: 0.75rem;">Same content, adjusted route:</p><ul style="list-style: none; padding: 0;"><li style="font-size: 0.875rem; margin: 0.5rem 0;">• Hold all doors open entering/exiting</li><li style="font-size: 0.875rem; margin: 0.5rem 0;">• Ensure elevator doors unlocked and open</li><li style="font-size: 0.875rem; margin: 0.5rem 0;">• Walk around Tesco (no stairs)</li><li style="font-size: 0.875rem; margin: 0.5rem 0;">• Only cross on green, wait for each guest</li><li style="font-size: 0.875rem; margin: 0.5rem 0;">• Take as much time as needed</li></ul></div></div></div>
+        
+        <div id="safety" class="tab-content"><h2 style="font-size: 1.5rem; font-weight: bold; color: #1f2937; margin-bottom: 1rem;">Safety & De-escalation</h2><div class="info-box red" style="border: 2px solid #dc2626;"><h3 style="display: flex; align-items: center; gap: 0.5rem;"><svg style="width: 1.5rem; height: 1.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>General Safety</h3><ul style="list-style: none; padding: 0; margin-top: 0.75rem;"><li style="font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: start; gap: 0.5rem;"><span style="color: #dc2626; font-weight: bold;">•</span>ONLY cross when walk sign is GREEN</li><li style="font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: start; gap: 0.5rem;"><span style="color: #dc2626; font-weight: bold;">•</span>If group splits, wait on other side</li><li style="font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: start; gap: 0.5rem;"><span style="color: #dc2626; font-weight: bold;">•</span>Carry tour sign if 10+ people</li><li style="font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: start; gap: 0.5rem;"><span style="color: #dc2626; font-weight: bold;">•</span>Hold doors for accessible tours</li><li style="font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: start; gap: 0.5rem;"><span style="color: #dc2626; font-weight: bold;">•</span>Use elevators in accessible tours (walk around Tesco, no stairs)</li><li style="font-size: 0.875rem; margin: 0.5rem 0; display: flex; align-items: start; gap: 0.5rem;"><span style="color: #dc2626; font-weight: bold;">•</span>Trust your instincts—if something feels wrong, remove group from situation</li></ul></div><div class="info-box yellow" style="border-left: 4px solid #ca8a04;"><h3 style="font-size: 1.125rem; margin-bottom: 0.75rem;">Dealing with Hostile Person</h3><div style="margin-bottom: 0.75rem;"><p style="font-weight: 600; font-size: 0.875rem; margin-bottom: 0.5rem;">Initial Response:</p><ul style="list-style: none; padding: 0;"><li style="font-size: 0.875rem; margin: 0.25rem 0;">• Take deep breath, remain calm</li><li style="font-size: 0.875rem; margin: 0.25rem 0;">• Give full attention, maintain eye contact</li><li style="font-size: 0.875rem; margin: 0.25rem 0;">• Don't take it personally</li><li style="font-size: 0.875rem; margin: 0.25rem 0;">• Use universal greeting</li></ul></div><div style="margin-bottom: 0.75rem;"><p style="font-weight: 600; font-size: 0.875rem; color: #166534; margin-bottom: 0.5rem;">✓ De-escalation Tactics:</p><ul style="list-style: none; padding: 0;"><li style="font-size: 0.875rem; margin: 0.25rem 0;">• Listen actively and respectfully</li><li style="font-size: 0.875rem; margin: 0.25rem 0;">• Show empathy, establish rapport</li><li style="font-size: 0.875rem; margin: 0.25rem 0;">• Provide choices</li><li style="font-size: 0.875rem; margin: 0.25rem 0;">• Speak slowly and controlled</li><li style="font-size: 0.875rem; margin: 0.25rem 0;">• Find solutions together</li><li style="font-size: 0.875rem; margin: 0.25rem 0;">• Set appropriate limits</li></ul></div><div><p style="font-weight: 600; font-size: 0.875rem; color: #991b1b; margin-bottom: 0.5rem;">✗ Things to Avoid:</p><ul style="list-style: none; padding: 0;"><li style="font-size: 0.875rem; margin: 0.25rem 0;">• Getting too emotionally involved</li><li style="font-size: 0.875rem; margin: 0.25rem 0;">• Power struggles or intimidation</li><li style="font-size: 0.875rem; margin: 0.25rem 0;">• Saying "I know how you feel"</li><li style="font-size: 0.875rem; margin: 0.25rem 0;">• Face-to-face/toe-to-toe posture</li><li style="font-size: 0.875rem; margin: 0.25rem 0;">• Touching the person</li><li style="font-size: 0.875rem; margin: 0.25rem 0;">• Fake smiling</li></ul></div></div><div class="info-box blue" style="border-left: 4px solid #2563eb;"><h3 style="font-size: 1.125rem; margin-bottom: 0.5rem;">Emergency Contacts</h3><p style="font-size: 0.875rem; margin-bottom: 0.5rem;">If unwanted behavior continues, contact immediately:</p><div style="font-size: 0.875rem;"><div style="display: flex; justify-content: space-between; padding: 0.25rem 0;"><span style="font-weight: 600;">Scott Loubser:</span><a href="mailto:s.loubser@nulondon.ac.uk" style="color: #2563eb; text-decoration: none; font-size: 0.75rem;">s.loubser@nulondon.ac.uk</a></div><div style="display: flex; justify-content: space-between; padding: 0.25rem 0;"><span style="font-weight: 600;">Gokce Dyson:</span><a href="mailto:gokce.dyson@nulondon.ac.uk" style="color: #2563eb; text-decoration: none; font-size: 0.75rem;">gokce.dyson@nulondon.ac.uk</a></div><div style="display: flex; justify-content: space-between; padding: 0.25rem 0;"><span style="font-weight: 600;">Hannah Ferrigno:</span><a href="mailto:hannah.ferrigno@nulondon.ac.uk" style="color: #2563eb; text-decoration: none; font-size: 0.75rem;">hannah.ferrigno@nulondon.ac.uk</a></div><div style="display: flex; justify-content: space-between; padding: 0.25rem 0;"><span style="font-weight: 600;">Devon House Security:</span><a href="mailto:security.dh@nulondon.ac.uk" style="color: #2563eb; text-decoration: none; font-size: 0.75rem;">security.dh@nulondon.ac.uk</a></div><div style="display: flex; justify-content: space-between; padding: 0.25rem 0;"><span style="font-weight: 600;">Portsoken Security:</span><a href="mailto:security.ps@nulondon.ac.uk" style="color: #2563eb; text-decoration: none; font-size: 0.75rem;">security.ps@nulondon.ac.uk</a></div></div></div><div class="info-box purple" style="border: 2px solid #9333ea;"><h3 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;"><svg style="width: 1.5rem; height: 1.5rem; color: #7e22ce;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>Trust Your Instincts</h3><p style="font-size: 0.875rem;">If something doesn't feel right—even if you can't explain why—remove yourself and your tour group from the situation. Your safety and your group's safety come first. Always.</p></div></div>
+
+        <div id="resources" class="tab-content">
+            <h2 style="font-size: 1.5rem; font-weight: bold; color: #1f2937; margin-bottom: 1rem;">📂 Resources</h2>
+            
+            <div class="info-box blue" style="margin-bottom: 1rem;">
+                <h3>Campus Tour Resources</h3>
+                <p style="font-size: 0.875rem;">Access additional tour materials, training documents, and reference files from the Campus Tour SharePoint folder.</p>
+            </div>
+            
+            <div class="card" style="border: 2px solid #dc2626;">
+                <div style="text-align: center; padding: 2rem 1rem;">
+                    <svg style="width: 4rem; height: 4rem; margin: 0 auto 1rem; color: #dc2626;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path>
+                    </svg>
+                    <h3 style="font-size: 1.25rem; font-weight: bold; margin-bottom: 0.5rem; color: #1f2937;">Campus Tour Folder</h3>
+                    <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 1.5rem;">Access training materials, scripts, and tour documentation</p>
+                    <a href="https://northeastern.sharepoint.com/:f:/r/sites/RecruitmentWPAmbassadors-CampusTour/Shared%20Documents/Campus%20Tour?csf=1&web=1&e=bcJCKN" 
+                       target="_blank" 
+                       style="display: inline-block; padding: 0.75rem 2rem; background: linear-gradient(135deg, #dc2626, #b91c1c); color: white; text-decoration: none; border-radius: 0.5rem; font-weight: 600; font-size: 0.875rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: all 0.2s;">
+                        Open Campus Tour Folder →
+                    </a>
+                </div>
+            </div>
+            
+            <div class="info-box yellow" style="margin-top: 1rem;">
+                <h3>📥 Access Required</h3>
+                <p style="font-size: 0.875rem;">You'll need to be signed in to your Northeastern account to access these resources. If you have trouble accessing the folder, contact Scott Loubser.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const tourStops=[{id:'campus-hub',number:1,name:'Campus Hub (Introduction)',duration:'5 min',location:'Devon House',keyPoints:['Introduce yourself: name, hometown, degree, year','Set expectations: 60-min tour, route overview','Campus Hub: social space, 140+ events/year','Experience Hub: professional staff available daily'],personalPrompt:'Share an event YOU attended in Campus Hub and why it mattered',scriptExample:'"Hey everyone! I\'m [name] from [hometown]. I\'m a [year] studying [major]. Our tour takes 60 minutes—we\'ll explore Devon House, walk through iconic London landmarks, and visit Portsoken. This tour is based on my experiences, so feel free to ask questions!"'},{id:'heart-space',number:2,name:'Heart Space',duration:'5 min',location:'Devon House - Stop in front of window if students aren\'t using space',keyPoints:['Largest teaching & event space','Industry panels & guest speakers (e.g., Coldplay drummer on sustainable touring)','Experiential learning: connecting theory to practice','Great networking opportunities'],personalPrompt:'Share a specific event or panel YOU attended here—how did it connect to your studies or change your thinking?',scriptExample:'"This is the Heart Space, our largest venue for major events and panels. Recently we had Coldplay\'s drummer speak about sustainability in the music industry. What\'s special about Northeastern is experiential learning—events like these help you see how studies connect to real-world careers."'},{id:'rooms-131-138',number:3,name:'Rooms 131 & 138',duration:'5 min',location:'Devon House',keyPoints:['NU London: 13 undergrad programmes, interdisciplinary (customize 40% of degree)','London Scholars: 300+ majors, Explore program','Small classes: under 40 students','Global Campus: semester abroad, double degree (3yr London + 1yr Boston)','All programmes eligible except LLB Law'],personalPrompt:'Talk about YOUR programme structure, an interesting elective, or how small class sizes have impacted your learning',scriptExample:'"NU London offers 13 flexible undergraduate programmes—you can customize up to 40% through interdisciplinary electives. Classes are intentionally small, under 40 students, encouraging open discussion. London Scholars can access 300+ majors and transition to Boston after year one."'},{id:'library',number:4,name:'Quiet Study Space/Library',duration:'3 min',location:'Devon House',keyPoints:['Silent study areas across campus','Honour library system with diverse programme books','Northeastern Digital Library: 1M+ e-books, thousands of journals','Access: British Library, Senate House, UCL, City of London libraries','Bookable group study rooms and pods'],personalPrompt:'Where do YOU study? Have you used any external libraries?',scriptExample:'"This is our quiet study zone. NU London\'s library combines on-site resources with Northeastern\'s digital collection—over a million e-books. We also have partnerships with major London libraries including the British Library and Senate House, giving access to one of the world\'s largest research networks."'},{id:'terrace',number:5,name:'Terrace/Café Area',duration:'5 min',location:'Devon House - Stand in front of bridge; go outside if weather permits',keyPoints:['Student Life: 140+ on-campus events (holidays, inclusion, wellbeing)','Off-campus activities: day trips, theatre, football matches','Student Union (SU): elected students, advocacy, support','40+ societies & sports clubs per semester','Students can create new clubs'],personalPrompt:'CRITICAL: What Student Life events have YOU attended? What club/society are you in? How has it shaped your time here?',scriptExample:'"Student Life organises over 140 events annually—from Diwali celebrations to day trips exploring the UK. The Student Union, run by elected students, supports you academically and personally. There are 40+ clubs and sports—and you can start your own based on your interests."'},{id:'marble-quay',number:6,name:'Marble Quay',duration:'5 min',location:'Walking route',keyPoints:['Student Support & Wellbeing: 1-to-1 appointments, learning plans, exam adjustments','Mental Health Advisors, financial guidance, counselling referrals','Academic Advising & Career Services in this building','Academic advisor assigned from day one','St Katharine Docks: cafés, restaurants, student discounts','White Mulberries: local NU London favourite'],personalPrompt:'Have you used any support services? Where do you like to study or eat in the Docks?',scriptExample:'"Our Student Support, Academic Advising, and Career Services teams are based here, so help is always nearby. Every student gets an Academic Advisor from day one. St Katharine Docks is a big part of student life—White Mulberries Café is a local favourite, and students get discounts at surrounding restaurants."'},{id:'tower-london',number:7,name:'Tower of London/Tower Hill',duration:'5 min',location:'Tower of London Gardens or between Tower & Tower Hill',keyPoints:['Tower history: royal palace, fortress, prison, armoury, treasury','London as classroom—experiential learning examples:','  • Law: UK courts visits','  • English: West End plays as coursework','  • Politics/IR: political institutions, think tanks','  • Economics: Bank of England visits','Transportation: Tower Hill, Tower Gateway, Aldgate, Fenchurch Street, London Bridge'],personalPrompt:'Have YOU been on field trips or class outings? Where and how did it connect to your learning?',scriptExample:'"Behind us is the Tower of London—a great example of how Northeastern uses London as a classroom. Law students visit UK courts, English students attend West End productions, Politics students engage with political institutions. We\'re also incredibly well-connected with five stations nearby."'},{id:'startup-hub',number:8,name:'Start-Up Hub (Outside)',duration:'5 min',location:'Outside building (weather dependent) - If raining without umbrellas, do this stop in Portsoken lobby',keyPoints:['NOTE: If raining and guests don\'t have umbrellas, deliver this stop in the Portsoken lobby instead','Co-op: 3-6 month paid, full-time work placement','Starts 2nd semester of 2nd year','Intro to Co-op class: interview skills, LinkedIn, CV/cover letters','Most co-ops are paid','Start-Up Hub provides co-op opportunities across industries','London Scholars: eligible after co-op class in Boston (1st sem, 2nd year)'],personalPrompt:'ESSENTIAL: Share YOUR co-op experience or a friend\'s co-op story—this is what makes Northeastern unique!',scriptExample:'"The Start-Up Hub is where students work alongside growing companies—great example of experiential learning. Co-op is a 3-6 month paid placement where you apply classroom learning in real-world settings. Students take Intro to Co-op first, learning interview prep and professional skills. Many say co-op truly defines their Northeastern education."'},{id:'portsoken-8',number:9,name:'Portsoken 8th Floor: Labs & Maker Space',duration:'10 min',location:'Portsoken - Room 832 or inside Maker Space',keyPoints:['In elevators: Mention Portsoken has 3 floors (PhD, undergrad labs, Maker Space, lecture halls)','Biology Lab: culture bacteria, DNA extraction, microscopy, industry-standard equipment','Chemistry Lab: synthesis, purification, analytical methods, fume cupboards, spectrophotometry','Physics Lab: mechanics, electricity, magnetism, optics experiments, modern data systems','Maker Space: CNC machines, laser cutters, 3D printers, CAD/CAM software'],personalPrompt:'If applicable: Have YOU used these facilities? What did you create or discover?',scriptExample:'"These labs give hands-on experience from first year. Biology students culture bacteria and extract DNA. Chemistry students learn synthesis using professional instruments. Physics students explore mechanics with modern data systems. The Maker Space has 3D printers and laser cutters—equipped with tools professional engineers use."'},{id:'portsoken-5',number:10,name:'Portsoken 5th Floor: YOUR STORY',duration:'10 min',location:'Portsoken 5th Floor - Near First Point (middle kitchen area)',keyPoints:['Walk guests around 5th floor showing classrooms','THIS IS YOUR MOMENT—most important stop','They\'ve seen facilities & heard facts—now they need YOUR story','Share: (1) Your decision - what drew you here?','Share: (2) Your realization - what confirmed it was right?','Share: (3) Your impact - how has Northeastern shaped you?'],personalPrompt:'THIS IS THE MOST IMPORTANT MOMENT: Your authentic story could be the deciding factor',scriptExample:'This is where YOU sell Northeastern through your personal journey. Be authentic about why you chose to come here, what has confirmed it was the right choice (teaching style? community? opportunities? growth?), and how Northeastern has shaped who you\'re becoming.'},{id:'portsoken-ground',number:11,name:'Portsoken Ground Floor: Wrap-Up',duration:'5 min',location:'Portsoken Ground Floor',keyPoints:['Accommodation: Housing team helps find right fit (private rental or student halls)','Rooms: studio to quad—never share bedrooms, only living spaces','Most accommodation within walking distance','Chapter Aldgate tour available','Ask for feedback survey (QR code on iPad)','Provide: undergraduate.study@nulondon.ac.uk','Collect all lanyards'],personalPrompt:'Answer any final questions warmly',scriptExample:'"That concludes our campus tour—thank you! If you\'d like to see student accommodation, we can visit Chapter Aldgate just nearby. Please scan the QR code for our feedback survey. For follow-up questions, contact undergraduate.study@nulondon.ac.uk. We\'d love to hear from you!"'}];
+        let deferredPrompt;function initTourStops(){const container=document.getElementById('tour-stops-container');tourStops.forEach(stop=>{const div=document.createElement('div');div.className='tour-stop';div.innerHTML=`<div class="tour-stop-header" onclick="toggleTourStop('${stop.id}')"><div class="tour-stop-title"><span class="tour-stop-number">${stop.number}</span><div><div class="tour-stop-name">${stop.name}</div><div class="tour-stop-meta">${stop.location} • ${stop.duration}</div></div></div><svg style="width:1.25rem;height:1.25rem;color:#9ca3af;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></div><div id="${stop.id}-content" class="tour-stop-content"><div class="tour-stop-section" style="background:#eff6ff;"><h4 style="color:#1e40af;">Key Points:</h4><ul>${stop.keyPoints.map(point=>`<li>• ${point}</li>`).join('')}</ul></div><div class="tour-stop-section" style="background:#fefce8;border-left:4px solid #ca8a04;"><h4 style="color:#854d0e;"><svg style="width:1rem;height:1rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>Personal Prompt:</h4><p style="font-size:0.875rem;color:#374151;">${stop.personalPrompt}</p></div>${stop.scriptExample?`<div class="tour-stop-section" style="background:#f9fafb;"><h4 style="color:#374151;"><svg style="width:1rem;height:1rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>Example Script:</h4><p class="tour-stop-script">${stop.scriptExample}</p></div>`:''}  </div>`;container.appendChild(div);});}function toggleTourStop(id){const content=document.getElementById(`${id}-content`);content.classList.toggle('expanded');}function switchTab(tabName){document.querySelectorAll('.nav-tab').forEach(tab=>{tab.classList.remove('active');});document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');document.querySelectorAll('.tab-content').forEach(content=>{content.classList.remove('active');});document.getElementById(tabName).classList.add('active');}document.querySelectorAll('.nav-tab').forEach(tab=>{tab.addEventListener('click',()=>{switchTab(tab.dataset.tab);});});function toggleExpandable(id){const content=document.getElementById(`${id}-content`);content.classList.toggle('expanded');}window.addEventListener('beforeinstallprompt',(e)=>{e.preventDefault();deferredPrompt=e;const dismissed=localStorage.getItem('installDismissed');if(!dismissed){document.getElementById('installBanner').classList.add('show');}});function installApp(){if(deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.then((choiceResult)=>{if(choiceResult.outcome==='accepted'){console.log('App installed');}deferredPrompt=null;document.getElementById('installBanner').classList.remove('show');});}else{alert('To install:\n\niPhone: Tap Share button → Add to Home Screen\n\nAndroid: Tap menu (⋮) → Add to Home Screen');}}function dismissInstall(){document.getElementById('installBanner').classList.remove('show');localStorage.setItem('installDismissed','true');}window.addEventListener('online',()=>{document.getElementById('offlineBadge').classList.remove('show');});window.addEventListener('offline',()=>{document.getElementById('offlineBadge').classList.add('show');});document.addEventListener('DOMContentLoaded',()=>{initTourStops();if(!navigator.onLine){document.getElementById('offlineBadge').classList.add('show');}});
+    </script>
+</body>
+</html>
